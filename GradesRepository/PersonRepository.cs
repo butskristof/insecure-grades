@@ -7,18 +7,20 @@ namespace GradesRepository
 {
 	public class PersonRepository : IPersonRepository
 	{
-		public List<Person> Persons { get; set; }
+		private List<Person> Persons { get; set; }
 
 		public PersonRepository()
 		{
 			this.Persons = new List<Person>()
 			{
-				new Student()
+				new Student
 				{
+					Id = Guid.Parse("cea4e519-8411-4606-9908-8c0bf28525a0"),
 					Name = "Joske Vermeulen"
 				},
-				new Teacher()
+				new Teacher
 				{
+					Id = Guid.Parse("aead81b0-bf38-41ad-829e-8433f17c9f9e"),
 					Name = "Pater Damiaan"
 				}
 			};

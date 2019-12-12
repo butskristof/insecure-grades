@@ -6,10 +6,10 @@ namespace GradesDomain
 	{
 		public Test()
 		{
-			this.Id = new Guid();
+			this.Id = Guid.NewGuid();
 		}
 
-		public Guid Id { get; }
+		public Guid Id { get; set; }
 		
 		public double MaxScore { get; set; }
 		public double Score { get; set; }

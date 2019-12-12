@@ -6,10 +6,10 @@ namespace GradesDomain
 	{
 		protected Person()
 		{
-			this.Id = new Guid();
+			this.Id = Guid.NewGuid();
 		}
 
-		public Guid Id { get; }
+		public Guid Id { get; set; }
 		public string Name { get; set; }
 	}
 }

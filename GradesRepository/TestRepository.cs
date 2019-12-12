@@ -7,7 +7,7 @@ namespace GradesRepository
 {
 	public class TestRepository : ITestRepository
 	{
-		public List<Test> Tests { get; set; }
+		private List<Test> Tests { get; set; }
 
 		public TestRepository()
 		{
@@ -16,7 +16,7 @@ namespace GradesRepository
 
 		public List<Test> ReadTestsForStudent(Guid id)
 		{
-			return this.Tests;
+			return this.Tests.Where(t => t.Student.Id == id).ToList();
 		}
 
 		public Test ReadTest(Guid id)
