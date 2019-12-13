@@ -1,6 +1,7 @@
 using System;
 using GradesApi.Models.Data;
 using GradesApi.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GradesApi.Controllers

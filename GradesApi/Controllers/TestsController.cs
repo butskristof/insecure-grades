@@ -1,6 +1,7 @@
 using System;
 using GradesApi.Models.Data;
 using GradesRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GradesApi.Controllers
@@ -24,6 +25,7 @@ namespace GradesApi.Controllers
 		}
 
 		[HttpPut("{id}")]
+		[Authorize(Roles = "Teacher")]
 		public IActionResult UpdateTestScore(string id, [FromBody] TestData data)
 		{
 			var guid = Guid.Parse(id);
