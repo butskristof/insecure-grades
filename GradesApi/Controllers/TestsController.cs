@@ -28,6 +28,9 @@ namespace GradesApi.Controllers
 		{
 			var guid = Guid.Parse(id);
 			var test = _repository.ReadTest(guid);
+			if (test == null)
+				return NotFound();
+			
 			test.Score = data.Score;
 			return Ok(test);
 		}

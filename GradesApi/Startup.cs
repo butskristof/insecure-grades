@@ -1,4 +1,5 @@
 using System.Linq;
+using GradesApi.Services;
 using GradesDomain;
 using GradesRepository;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +26,8 @@ namespace GradesApi
 
 			services.AddSingleton<IPersonRepository, PersonRepository>();
 			services.AddSingleton<ITestRepository, TestRepository>();
+
+			services.AddScoped<IUserService, UserService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
