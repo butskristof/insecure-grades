@@ -2,8 +2,10 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GradesApi.Models;
 using GradesDomain;
 using GradesRepository;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GradesApi.Services
@@ -11,10 +13,12 @@ namespace GradesApi.Services
 	public class UserService : IUserService
 	{
 		private readonly IPersonRepository _personRepository;
+		private readonly IOptions<Secrets> _secrets;
 
-		public UserService(IPersonRepository personRepository)
+		public UserService(IPersonRepository personRepository, IOptions<Secrets> secrets)
 		{
 			_personRepository = personRepository;
+			this._secrets = secrets;
 		}
 
 		public string GetToken(string id, string password)
@@ -26,10 +30,12 @@ namespace GradesApi.Services
 
 			var isTeacher = user is Teacher;
 			var role = isTeacher ? "Teacher" : "Student";
+
 			
 			// generate jwt
 			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes("veryverysecretsecretykeykey");
+			var jwt = _secrets.Value.Jwt;
+			var key = Encoding.ASCII.GetBytes(jwt);
 			var tokenDescriptor = new SecurityTokenDescriptor
 			{
 				Subject = new ClaimsIdentity(new Claim[] 

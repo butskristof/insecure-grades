@@ -18,6 +18,10 @@ namespace GradesApi
 
 		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
+				.ConfigureAppConfiguration(((context, builder) =>
+					{
+						builder.AddJsonFile("wwwroot/secrets.json", optional: false, reloadOnChange: true);
+					}))
 				.ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 	}
 }

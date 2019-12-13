@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Text;
+using GradesApi.Models;
 using GradesApi.Services;
 using GradesDomain;
 using GradesRepository;
@@ -28,8 +29,14 @@ namespace GradesApi
 		{
 			services.AddControllers();
 			
+			services.AddOptions();
+
+			// Add our Config object so it can be injected
+			services.Configure<Secrets>(Configuration.GetSection("Secrets"));
+			
 			// set up jwt authentication
-			var key = Encoding.ASCII.GetBytes("veryverysecretsecretykeykey");
+			var sec = Configuration.GetSection("Secrets").Get<Secrets>();
+			var key = Encoding.ASCII.GetBytes(sec.Jwt);
 			services
 				.AddAuthentication(x =>
 				{
@@ -65,6 +72,7 @@ namespace GradesApi
 			}
 
 			app.UseHttpsRedirection();
+			app.UseStaticFiles();
 
 			app.UseRouting();
 
