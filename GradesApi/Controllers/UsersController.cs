@@ -23,7 +23,11 @@ namespace GradesApi.Controllers
 		{
 			try
 			{
-				return Ok(_userService.GetToken(data.Id, data.Password));
+				var token = _userService.GetToken(data.Id, data.Password);
+				return Ok(new
+				{
+					token
+				});
 			}
 			catch (UnauthorizedAccessException e)
 			{
