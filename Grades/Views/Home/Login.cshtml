@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Insecure Grades</title>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha256-l85OmPOjvil/SOvVt3HnSSjzF1TUMyT9eV0c2BzEGzU=" crossorigin="anonymous" />
+	<link rel="stylesheet" href="~/styles.css">
+</head>
+<body>
+<div class="container">
+	<h1>Insecure grades</h1>
+
+	<form asp-action="Login" method="post">
+		<div class="input-group">
+			<label for="password">Password</label>
+			<input type="password" name="password" id="password" />
+		</div>
+		
+		<input type="submit" value="Log in" />
+	</form>
+</div>
+</body>
+</html>

@@ -72,8 +72,8 @@ function updateScore() {
 		})
 			.then(result => {
 				console.log(result);
-				if (result.status === 401) {
-					showMessage("#update-response", "Unauthorized")
+				if (result.status !== 200) {
+					showMessage("#update-response", "Updating failed")
 				} else {
 					showMessage("#update-response", "Success!")
 				}

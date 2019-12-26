@@ -1,19 +1,23 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using GradesApi.Models;
 using GradesApi.Services;
 using GradesDomain;
 using GradesRepository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
-namespace GradesApi
+namespace Grades
 {
 	public class Startup
 	{
@@ -27,10 +31,8 @@ namespace GradesApi
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddControllers();
+			services.AddControllersWithViews();
 			
-			services.AddOptions();
-
 			// Add our Config object so it can be injected
 			services.Configure<Secrets>(Configuration.GetSection("Secrets"));
 			
@@ -70,6 +72,12 @@ namespace GradesApi
 			{
 				app.UseDeveloperExceptionPage();
 			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				// app.UseHsts();
+			}
 
 			// app.UseHttpsRedirection();
 			app.UseStaticFiles();
@@ -79,7 +87,12 @@ namespace GradesApi
 			app.UseAuthentication();
 			app.UseAuthorization();
 
-			app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapControllerRoute(
+					name: "default",
+					pattern: "{controller=Home}/{action=Index}/{id?}");
+			});
 			
 			Seed(app);
 		}
