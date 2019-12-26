@@ -28,7 +28,7 @@ namespace Grades.Controllers
 		[Route("Login")]
 		public IActionResult Login([FromForm] PasswordData passwordData)
 		{
-			if (passwordData.Password.Equals("help"))
+			if (passwordData.Password.Equals("20op20"))
 			{
 				return View("Index");
 			}
