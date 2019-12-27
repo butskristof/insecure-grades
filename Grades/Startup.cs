@@ -106,8 +106,8 @@ namespace Grades
 			var t = new Test()
 			{
 				Student = student,
-				MaxScore = 10,
-				Score = 5
+				MaxScore = 20,
+				Score = 9
 			};
 			
 			testRepo.CreateTest(t);

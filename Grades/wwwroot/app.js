@@ -67,7 +67,7 @@ function updateScore() {
 				'Authorization': `Bearer ${token}`
 			},
 			body: JSON.stringify({
-				score: 10
+				score: 20
 			})
 		})
 			.then(result => {
