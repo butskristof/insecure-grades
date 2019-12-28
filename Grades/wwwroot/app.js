@@ -51,11 +51,11 @@ function updateScore() {
 	const token = localStorage.getItem("token");
 
 	if (!token) {
-		showMessage("#update-response", "Please log in first.")
+		showMessage("#update-response", "Gelieve eerst in te loggen.")
 	}
 	
 	if (!testData.length) {
-		showMessage("#update-response", "Please view test scores first.")
+		showMessage("#update-response", "Bekijk eerst de testscore.")
 	}
 	
 	testData.forEach(t => {
@@ -73,9 +73,9 @@ function updateScore() {
 			.then(result => {
 				console.log(result);
 				if (result.status !== 200) {
-					showMessage("#update-response", "Updating failed")
+					showMessage("#update-response", "Bijwerken mislukt.")
 				} else {
-					showMessage("#update-response", "Success!")
+					showMessage("#update-response", "Score werd bijgewerkt!")
 				}
 			})
 	});
